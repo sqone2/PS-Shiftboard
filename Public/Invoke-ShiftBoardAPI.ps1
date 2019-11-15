@@ -8,7 +8,7 @@
     API Access Key from ShiftBoard account
     To view key, login > Admin > Cog Icon > General Settings > API Configuration
 
-.PARAMETER SecretKey
+.PARAMETER SignatureKey
  
     Signature Key from ShiftBoard account
     To view key, login > Admin > Cog Icon > General Settings > API Configuration
@@ -37,7 +37,7 @@
     $method = 'account.list'
     $params =  '{}'
 
-    $result = Invoke-ShiftboardApi -AccessKey $key -SecretKey $secret -ShiftBoardMethod $method -ParameterString $params
+    $result = Invoke-ShiftboardApi -AccessKey $key -SignatureKey $secret -ShiftBoardMethod $method -ParameterString $params
 
     # Returns first 10 user accounts from ShiftBoard account
 
@@ -55,7 +55,7 @@
 
     $paramsJson = $params | ConvertTo-Json
 
-    $result = Invoke-ShiftboardApi -AccessKey $key -SecretKey $secret -ShiftBoardMethod $method -ParameterString $paramsJson
+    $result = Invoke-ShiftboardApi -AccessKey $key -SignatureKey $secret -ShiftBoardMethod $method -ParameterString $paramsJson
 
     # Returns first 1000 user accounts from ShiftBoard account
     
@@ -75,7 +75,7 @@
     }
     $params = $newUser | ConvertTo-Json
 
-    $result = Invoke-ShiftboardApi -AccessKey $key -SecretKey $secret -ShiftBoardMethod $method -ParameterString $params
+    $result = Invoke-ShiftboardApi -AccessKey $key -SignatureKey $secret -ShiftBoardMethod $method -ParameterString $params
 
     # Creates new user named "Test User". Other relevant properties can be added to the $newUser HashTable as needed.
     
@@ -87,7 +87,7 @@ function Invoke-ShiftboardApi
     param
     (
         [Parameter(Mandatory=$true)][string]$AccessKey,
-        [Parameter(Mandatory=$true)][string]$SecretKey,
+        [Parameter(Mandatory=$true)][string]$SignatureKey,
         [Parameter(Mandatory=$true)][string]$ShiftBoardMethod,
         [Parameter(Mandatory=$true)][string]$ParameterString,
         [Parameter(Mandatory=$false)][ValidateSet("GET", "POST")][string]$HttpMethod = "GET"
@@ -106,8 +106,8 @@ function Invoke-ShiftboardApi
     $ShiftBoardMethodStringBytes = [System.Text.Encoding]::UTF8.GetBytes($ShiftBoardMethodString)
 
     # encode apiSecret
-    $SecretKeyBytes = [System.Text.Encoding]::UTF8.GetBytes($SecretKey)
-    $encodedSecret = [System.Security.Cryptography.HMACSHA1]::new($SecretKeyBytes);
+    $SignatureKeyBytes = [System.Text.Encoding]::UTF8.GetBytes($SignatureKey)
+    $encodedSecret = [System.Security.Cryptography.HMACSHA1]::new($SignatureKeyBytes);
 
     # combine method string and apiSecret into hash and convert to base64
     $combinedHash = $encodedSecret.ComputeHash($ShiftBoardMethodStringBytes)
