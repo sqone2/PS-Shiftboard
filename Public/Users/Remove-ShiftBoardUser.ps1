@@ -19,7 +19,7 @@
     Id of ShiftBoard user. Can use ExternalId instead
 
 
-.PARAMETER Externalid
+.PARAMETER ExternalId
 
     ExternalId of ShiftBoard user. Can use Id instead
 
