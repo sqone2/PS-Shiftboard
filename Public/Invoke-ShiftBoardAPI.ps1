@@ -14,11 +14,6 @@
     To view key, login > Admin > Cog Icon > General Settings > API Configuration
 
 
-.PARAMETER  HttpMethod
-
-    Specifies the http method used for the web request. i.e. GET, POST
-
-
 .PARAMETER ShiftBoardMethod
 
     Method specified in ShiftBoard documentation. Format is <object>.<action>  i.e. account.create
@@ -27,6 +22,12 @@
 .PARAMETER ParameterString
 
     JSON string that specifies the parameters passed to ShiftBoard API. Use '{}' if no parameters need to be passed
+
+
+.PARAMETER  HttpMethod
+
+    Specifies the http method used for the web request. Default is GET
+    ShiftBoard documentation: "At this time, only GET requests are supported (except for batch requests, which use POST)"
     
 
 .EXAMPLE
@@ -36,9 +37,27 @@
     $method = 'account.list'
     $params =  '{}'
 
-    $result = Invoke-ShiftboardApi -AccessKey $key -SecretKey $secret -HttpMethod: GET -ShiftBoardMethod $method -ParameterString $params
+    $result = Invoke-ShiftboardApi -AccessKey $key -SecretKey $secret -ShiftBoardMethod $method -ParameterString $params
 
-    # Returns all user accounts from ShiftBoard account
+    # Returns first 10 user accounts from ShiftBoard account
+
+
+.EXAMPLE
+    
+    $key = 'ef1231ea-9a1a-59c2-110a-e123a1231333'
+    $secret = 'TvL>UoWKb&HZbdZqDpKja+LdKvLf9TBDm4*Frfhu'
+    $method = 'account.list'
+    $params =  @{
+        page = @{
+            "batch" = 1000
+        }
+    }
+
+    $paramsJson = $params | ConvertTo-Json
+
+    $result = Invoke-ShiftboardApi -AccessKey $key -SecretKey $secret -ShiftBoardMethod $method -ParameterString $paramsJson
+
+    # Returns first 1000 user accounts from ShiftBoard account
     
 
 .EXAMPLE
@@ -56,7 +75,7 @@
     }
     $params = $newUser | ConvertTo-Json
 
-    $result = Invoke-ShiftboardApi -AccessKey $key -SecretKey $secret -HttpMethod: GET -ShiftBoardMethod $method -ParameterString $params
+    $result = Invoke-ShiftboardApi -AccessKey $key -SecretKey $secret -ShiftBoardMethod $method -ParameterString $params
 
     # Creates new user named "Test User". Other relevant properties can be added to the $newUser HashTable as needed.
     
@@ -69,9 +88,9 @@ function Invoke-ShiftboardApi
     (
         [Parameter(Mandatory=$true)][string]$AccessKey,
         [Parameter(Mandatory=$true)][string]$SecretKey,
-        [Parameter(Mandatory=$true)][ValidateSet("GET", "POST", "PUT", "PATCH", "DELETE")][string]$HttpMethod,
         [Parameter(Mandatory=$true)][string]$ShiftBoardMethod,
-        [Parameter(Mandatory=$true)][string]$ParameterString
+        [Parameter(Mandatory=$true)][string]$ParameterString,
+        [Parameter(Mandatory=$false)][ValidateSet("GET", "POST")][string]$HttpMethod = "GET"
     )
 
 
@@ -112,6 +131,12 @@ function Invoke-ShiftboardApi
     #### Step 4. Call API
 
     $response = Invoke-RestMethod  -Uri $uri -Method $HttpMethod -UseBasicParsing: $true
+
+
+    if ($response.error -ne $null)
+    {
+        throw "Error $($response.error.code) / $($response.error.data.code) - $($response.error.data.message)"
+    }
 
     return $response
 
