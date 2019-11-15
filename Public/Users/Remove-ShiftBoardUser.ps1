@@ -14,35 +14,25 @@
     To view key, login > Admin > Cog Icon > General Settings > API Configuration
 
 
-.PARAMETER FirstName
+.PARAMETER Id
 
-    First name value of new user
+    Id of ShiftBoard user. Can use ExternalId instead
 
 
-.PARAMETER LastName
+.PARAMETER Externalid
 
-    Last name value of new user
+    ExternalId of ShiftBoard user. Can use Id instead
 
-.PARAMETER Email
 
-    Email value of new user
-
-.PARAMETER ExternalId
-
-   External id of new user
-
-.PARAMETER TimeZone
-
-    New user's time zone
     
 .EXAMPLE
     
     $key = 'ef1231ea-9a1a-59c2-110a-e123a1231333'
     $secret = 'TvL>UoWKb&HZbdZqDpKja+LdKvLf9TBDm4*Frfhu'
 
-    $newUser = New-ShiftboardUser -AccessKey $key -SignatureKey $secret -FirstName "Test" -LastName "User" -Email "test@domain.com" -ExternalId "999999" -TimeZone 'Central'
+    Remove-ShiftboardUser -AccessKey $key -SignatureKey $secret -ExternalId '123456'
 
-    # Creates new ShiftBoard user named "Test User"
+    # Removes ShiftBoard user with ExternalId "123456"
 
     
 
