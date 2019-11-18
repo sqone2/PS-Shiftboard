@@ -1,7 +1,7 @@
 ﻿<#
 .SYNOPSIS
     
-    Function used communicate with the ShiftBoard.com JSON-RPC 2.0 API
+    Function used remove a user from ShiftBoard
  
 .PARAMETER AccessKey
  
