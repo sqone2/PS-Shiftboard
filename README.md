@@ -1,5 +1,5 @@
 # PS-Shiftboard
-Functions for working Shiftboard.com JSON-RPC 2.0 API
+Powershell functions for working Shiftboard.com JSON-RPC 2.0 API
 
 Shiftboard API documentation: https://www.shiftdata.com/
 
