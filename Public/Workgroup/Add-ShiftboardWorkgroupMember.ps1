@@ -5,21 +5,21 @@
  
 .PARAMETER AccessKey
  
-    API Access Key from ShiftBoard account
+    API Access Key from Shiftboard account
     To view key, login > Admin > Cog Icon > General Settings > API Configuration
 
 .PARAMETER SignatureKey
  
-    Signature Key from ShiftBoard account
+    Signature Key from Shiftboard account
     To view key, login > Admin > Cog Icon > General Settings > API Configuration
 
 .PARAMETER WorkgroupId
  
-    Id of ShiftBoard workgroup to add member to
+    Id of Shiftboard workgroup to add member to
 
 .PARAMETER AccountId
  
-    Id of ShiftBoard account to be added to workgroup
+    Id of Shiftboard account to be added to workgroup
 
 .PARAMETER Level
  
@@ -31,7 +31,7 @@
     $key = 'ef1231ea-9a1a-59c2-110a-e123a1231333'
     $secret = 'TvL>UoWKb&HZbdZqDpKja+LdKvLf9TBDm4*Frfhu'
 
-    $result = Add-ShiftBoardWorkgroupMember -AccessKey $key -SignatureKey $secret -WorkgroupId "123456" -AccountId "999" -Level Member
+    $result = Add-ShiftboardWorkgroupMember -AccessKey $key -SignatureKey $secret -WorkgroupId "123456" -AccountId "999" -Level Member
 
     # adds account with id "999" to workgroup with id "123456" with level "member"
 
@@ -39,7 +39,7 @@
 
  
 #>
-function Add-ShiftBoardWorkgroupMember
+function Add-ShiftboardWorkgroupMember
 {
     [CmdletBinding(PositionalBinding=$false)]
     param
@@ -68,7 +68,7 @@ function Add-ShiftBoardWorkgroupMember
 
     $method = 'membership.create'
 
-    $response = Invoke-ShiftboardApi -AccessKey $AccessKey -SignatureKey $SignatureKey -ShiftBoardMethod $method -ParameterString $paramsJson
+    $response = Invoke-ShiftboardApi -AccessKey $AccessKey -SignatureKey $SignatureKey -ShiftboardMethod $method -ParameterString $paramsJson
 
     return $response.result
 

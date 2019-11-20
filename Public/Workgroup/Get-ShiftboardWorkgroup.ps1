@@ -1,21 +1,21 @@
 ﻿<#
 .SYNOPSIS
     
-    Function used get workgroup(s) from ShiftBoard
+    Function used get workgroup(s) from Shiftboard
  
 .PARAMETER AccessKey
  
-    API Access Key from ShiftBoard account
+    API Access Key from Shiftboard account
     To view key, login > Admin > Cog Icon > General Settings > API Configuration
 
 .PARAMETER SignatureKey
  
-    Signature Key from ShiftBoard account
+    Signature Key from Shiftboard account
     To view key, login > Admin > Cog Icon > General Settings > API Configuration
 
 .PARAMETER WorkgroupName
  
-    Name of workgroup to get from ShiftBoard. If omitted, all workgroups will be returned
+    Name of workgroup to get from Shiftboard. If omitted, all workgroups will be returned
 
     
 .EXAMPLE
@@ -36,12 +36,12 @@
     $result = Get-ShiftboardWorkgroup -AccessKey $key -SignatureKey $secret -WorkgroupName "Sales"
 
 
-    # Returns ShiftBoard workgroup with name "Sales"
+    # Returns Shiftboard workgroup with name "Sales"
     
 
  
 #>
-function Get-ShiftBoardWorkgroup
+function Get-ShiftboardWorkgroup
 {
     [CmdletBinding(PositionalBinding=$false)]
     param
@@ -62,7 +62,7 @@ function Get-ShiftBoardWorkgroup
 
     $method = 'workgroup.list'
 
-    $response = Invoke-ShiftboardApi -AccessKey $AccessKey -SignatureKey $SignatureKey -ShiftBoardMethod $method -ParameterString $paramsJson
+    $response = Invoke-ShiftboardApi -AccessKey $AccessKey -SignatureKey $SignatureKey -ShiftboardMethod $method -ParameterString $paramsJson
 
     if ($PSBoundParameters.Keys -contains "WorkgroupName")
     {
