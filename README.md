@@ -1,5 +1,5 @@
 # PS-Shiftboard
-Functions for working ShiftBoard JSON-RPC 2.0 API
+Functions for working Shiftboard.com JSON-RPC 2.0 API
 
 Shiftboard API documentation: https://www.shiftdata.com/
 
@@ -28,17 +28,32 @@ To view your API credentials: Login > Admin > Cog Icon > General Settings > API 
 
 #### Accounts (Users)
 
-Returns Shiftboard user account with email "jdoe@domain.com"
-
+Get Shiftboard user account
 
     $result = Get-ShiftboardAccount -AccessKey $key -SignatureKey $secret -Email "jdoe@domain.com"
 
 
-Create new Shiftboard account named "Test Account"
+Create new Shiftboard user account
 
     New-ShiftboardAccount -AccessKey $key -SignatureKey $secret -FirstName "Test" -LastName "Account" -Email "test@domain.com" -ExternalId "999999" -TimeZone 'Central'
 
 
-Adds account with id "999" to workgroup with id "123456" with level "member"
+#### Workgroups (Teams)
+
+Get a workgroup's members
+
+    Get-ShiftboardWorkgroupMember -AccessKey $key -SignatureKey $secret -WorkgroupId "123456"
+
+
+Adds account to a workgroup
 
     Add-ShiftboardWorkgroupMember -AccessKey $key -SignatureKey $secret -WorkgroupId "123456" -AccountId "999" -Level Member
+    
+#### Time Off Requests
+
+Create new time off request
+
+    New-ShiftboardTimeOffRequest -AccessKey $key -SignatureKey $secret -AccountId '123456' -Type: 'All Day' -Status: Approved -StartDate '2019-12-25' -WorkgroupId "98765" -Paid: $true -Category 4
+    
+    
+    
