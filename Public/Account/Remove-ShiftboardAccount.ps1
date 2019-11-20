@@ -1,7 +1,7 @@
 ﻿<#
 .SYNOPSIS
     
-    Function used remove a Account from Shiftboard
+    Function used remove an account from Shiftboard
  
 .PARAMETER AccessKey
  

@@ -1,7 +1,7 @@
 ﻿<#
 .SYNOPSIS
     
-    Function used to create a new Account in Shiftboard
+    Function used to create a new account in Shiftboard
  
 .PARAMETER AccessKey
  
@@ -16,24 +16,28 @@
 
 .PARAMETER FirstName
 
-    First name value of new Account
+    First name value of new account
 
 
 .PARAMETER LastName
 
-    Last name value of new Account
+    Last name value of new account
 
 .PARAMETER Email
 
-    Email value of new Account
+    Email value of new account
 
 .PARAMETER ExternalId
 
-   External id of new Account
+   External id of new account
 
 .PARAMETER TimeZone
 
-    New Account's time zone
+    New account's time zone
+
+.PARAMETER StartDate
+
+    New accounts's starting date
     
 .EXAMPLE
     
@@ -42,7 +46,7 @@
 
     $newAccount = New-ShiftboardAccount -AccessKey $key -SignatureKey $secret -FirstName "Test" -LastName "Account" -Email "test@domain.com" -ExternalId "999999" -TimeZone 'Central'
 
-    # Creates new Shiftboard Account named "Test Account"
+    # Creates new Shiftboard account named "Test Account"
 
     
 

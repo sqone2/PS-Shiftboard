@@ -1,7 +1,7 @@
 ﻿<#
 .SYNOPSIS
     
-    Function used to get Account(s) from Shiftboard
+    Function used to get account(s) from Shiftboard
  
 .PARAMETER AccessKey
  
