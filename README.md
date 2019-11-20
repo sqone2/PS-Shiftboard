@@ -2,7 +2,8 @@
 Functions for working Shiftboard.com JSON-RPC 2.0 API
 
 Shiftboard API documentation: https://www.shiftdata.com/
-
+&nbsp;
+&nbsp;
 ### Installation
 
 Download source and copy to a valid module directory. i.e. C:\Program Files\WindowsPowerShell\Modules\
@@ -10,7 +11,8 @@ From Powershell, import module
 
     Import-Module PS-Shiftboard
     
-    
+&nbsp;
+&nbsp;
     
     
 ### Prerequisites
@@ -21,7 +23,8 @@ To view your API credentials: Login > Admin > Cog Icon > General Settings > API 
     $secret = 'TvL>UoWKb&HZbdZqDpKja+LdKvLf9TBDm4*Frfhu'
 
 
-
+&nbsp;
+&nbsp;
 
 ### Examples
 
@@ -32,11 +35,13 @@ Get Shiftboard user account
 
     Get-ShiftboardAccount -AccessKey $key -SignatureKey $secret -Email "jdoe@domain.com"
 
+&nbsp;
 
 Create new Shiftboard user account
 
     New-ShiftboardAccount -AccessKey $key -SignatureKey $secret -FirstName "Test" -LastName "Account" -Email "test@domain.com" -ExternalId "999999" -TimeZone 'Central'
 
+&nbsp;
 
 #### Workgroups (Teams)
 
