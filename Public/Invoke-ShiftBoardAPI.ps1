@@ -1,33 +1,33 @@
 ﻿<#
 .SYNOPSIS
     
-    Function used communicate with the ShiftBoard.com JSON-RPC 2.0 API
+    Function used communicate with the Shiftboard.com JSON-RPC 2.0 API
  
 .PARAMETER AccessKey
  
-    API Access Key from ShiftBoard account
+    API Access Key from Shiftboard account
     To view key, login > Admin > Cog Icon > General Settings > API Configuration
 
 .PARAMETER SignatureKey
  
-    Signature Key from ShiftBoard account
+    Signature Key from Shiftboard account
     To view key, login > Admin > Cog Icon > General Settings > API Configuration
 
 
-.PARAMETER ShiftBoardMethod
+.PARAMETER ShiftboardMethod
 
-    Method specified in ShiftBoard documentation. Format is <object>.<action>  i.e. account.create
+    Method specified in Shiftboard documentation. Format is <object>.<action>  i.e. account.create
 
 
 .PARAMETER ParameterString
 
-    JSON string that specifies the parameters passed to ShiftBoard API. Use '{}' if no parameters need to be passed
+    JSON string that specifies the parameters passed to Shiftboard API. Use '{}' if no parameters need to be passed
 
 
 .PARAMETER  HttpMethod
 
     Specifies the http method used for the web request. Default is GET
-    ShiftBoard documentation: "At this time, only GET requests are supported (except for batch requests, which use POST)"
+    Shiftboard documentation: "At this time, only GET requests are supported (except for batch requests, which use POST)"
     
 
 .EXAMPLE
@@ -37,9 +37,9 @@
     $method = 'account.list'
     $params =  '{}'
 
-    $result = Invoke-ShiftboardApi -AccessKey $key -SignatureKey $secret -ShiftBoardMethod $method -ParameterString $params
+    $result = Invoke-ShiftboardApi -AccessKey $key -SignatureKey $secret -ShiftboardMethod $method -ParameterString $params
 
-    # Returns first 10 user accounts from ShiftBoard account
+    # Returns first 10 user accounts from Shiftboard account
 
 
 .EXAMPLE
@@ -55,9 +55,9 @@
 
     $paramsJson = $params | ConvertTo-Json
 
-    $result = Invoke-ShiftboardApi -AccessKey $key -SignatureKey $secret -ShiftBoardMethod $method -ParameterString $paramsJson
+    $result = Invoke-ShiftboardApi -AccessKey $key -SignatureKey $secret -ShiftboardMethod $method -ParameterString $paramsJson
 
-    # Returns first 1000 user accounts from ShiftBoard account
+    # Returns first 1000 user accounts from Shiftboard account
     
 
 .EXAMPLE
@@ -75,7 +75,7 @@
     }
     $params = $newUser | ConvertTo-Json
 
-    $result = Invoke-ShiftboardApi -AccessKey $key -SignatureKey $secret -ShiftBoardMethod $method -ParameterString $params
+    $result = Invoke-ShiftboardApi -AccessKey $key -SignatureKey $secret -ShiftboardMethod $method -ParameterString $params
 
     # Creates new user named "Test User". Other relevant properties can be added to the $newUser HashTable as needed.
     
@@ -88,7 +88,7 @@ function Invoke-ShiftboardApi
     (
         [Parameter(Mandatory=$true)][string]$AccessKey,
         [Parameter(Mandatory=$true)][string]$SignatureKey,
-        [Parameter(Mandatory=$true)][string]$ShiftBoardMethod,
+        [Parameter(Mandatory=$true)][string]$ShiftboardMethod,
         [Parameter(Mandatory=$true)][string]$ParameterString,
         [Parameter(Mandatory=$false)][ValidateSet("GET", "POST")][string]$HttpMethod = "GET"
     )
@@ -102,15 +102,15 @@ function Invoke-ShiftboardApi
     #### Step 1. Create base64 hash of apiSecret, parameters, and method
 
     # combine method and parameters into "methodString". Turn methodString into bytes
-    $ShiftBoardMethodString = "method" + $ShiftBoardMethod + "params" + $ParameterString
-    $ShiftBoardMethodStringBytes = [System.Text.Encoding]::UTF8.GetBytes($ShiftBoardMethodString)
+    $ShiftboardMethodString = "method" + $ShiftboardMethod + "params" + $ParameterString
+    $ShiftboardMethodStringBytes = [System.Text.Encoding]::UTF8.GetBytes($ShiftboardMethodString)
 
     # encode apiSecret
     $SignatureKeyBytes = [System.Text.Encoding]::UTF8.GetBytes($SignatureKey)
     $encodedSecret = [System.Security.Cryptography.HMACSHA1]::new($SignatureKeyBytes);
 
     # combine method string and apiSecret into hash and convert to base64
-    $combinedHash = $encodedSecret.ComputeHash($ShiftBoardMethodStringBytes)
+    $combinedHash = $encodedSecret.ComputeHash($ShiftboardMethodStringBytes)
     $combinedBase64 = [System.Convert]::ToBase64String($combinedHash)
 
 
@@ -125,7 +125,7 @@ function Invoke-ShiftboardApi
     #### Step 3. Create URL
 
 
-    $uri = "$($baseUrl)?$($jsonRPCString)&method=$($ShiftBoardMethod)&params=$($encodedParams)&access_key_id=$($AccessKey)&signature=$($combinedBase64)"
+    $uri = "$($baseUrl)?$($jsonRPCString)&method=$($ShiftboardMethod)&params=$($encodedParams)&access_key_id=$($AccessKey)&signature=$($combinedBase64)"
 
 
     #### Step 4. Call API

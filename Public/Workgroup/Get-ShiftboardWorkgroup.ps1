@@ -1,7 +1,7 @@
 ﻿<#
 .SYNOPSIS
     
-    Function used to get user(s) from ShiftBoard
+    Function used get workgroup(s) from ShiftBoard
  
 .PARAMETER AccessKey
  
@@ -13,9 +13,9 @@
     Signature Key from ShiftBoard account
     To view key, login > Admin > Cog Icon > General Settings > API Configuration
 
-.PARAMETER Email
+.PARAMETER WorkgroupName
  
-    Email of user to get from ShiftBoard. If omitted, all users will be returned
+    Name of workgroup to get from ShiftBoard. If omitted, all workgroups will be returned
 
     
 .EXAMPLE
@@ -23,9 +23,9 @@
     $key = 'ef1231ea-9a1a-59c2-110a-e123a1231333'
     $secret = 'TvL>UoWKb&HZbdZqDpKja+LdKvLf9TBDm4*Frfhu'
 
-    $result = Get-ShiftBoardUser -AccessKey $key -SignatureKey $secret
+    $result = Get-ShiftboardWorkgroup -AccessKey $key -SignatureKey $secret
 
-    # returns all shiftboard users
+    # returns all shiftboard workgroups
 
 
 .EXAMPLE
@@ -33,50 +33,46 @@
     $key = 'ef1231ea-9a1a-59c2-110a-e123a1231333'
     $secret = 'TvL>UoWKb&HZbdZqDpKja+LdKvLf9TBDm4*Frfhu'
 
-    $result = Get-ShiftBoardUser -AccessKey $key -SignatureKey $secret -Email "jdoe@domain.com"
+    $result = Get-ShiftboardWorkgroup -AccessKey $key -SignatureKey $secret -WorkgroupName "Sales"
 
 
-    # Returns ShiftBoard user with email "jdoe@domain.com"
+    # Returns ShiftBoard workgroup with name "Sales"
     
 
  
 #>
-function Get-ShiftboardUser
+function Get-ShiftBoardWorkgroup
 {
     [CmdletBinding(PositionalBinding=$false)]
     param
     (
         [Parameter(Mandatory=$true)][string]$AccessKey,
         [Parameter(Mandatory=$true)][string]$SignatureKey,
-        [Parameter(Mandatory=$false)][string]$Email
+        [Parameter(Mandatory=$false)][string]$WorkgroupName
     )
 
-
-    if ($PSBoundParameters.Keys -contains "Email")
-    {
-            $params =  @{
-                select = @{
-                    email = $Email
-                }
-            }
-                
-    }
-    else
-    {
-        $params =  @{
-            page = @{
-                batch = 1000
-            }
+    $params =  @{
+        page = @{
+            batch = 1000
         }
     }
 
-
-    $method = 'account.list'
-
     $paramsJson = $params | ConvertTo-Json
+    
+
+    $method = 'workgroup.list'
 
     $response = Invoke-ShiftboardApi -AccessKey $AccessKey -SignatureKey $SignatureKey -ShiftBoardMethod $method -ParameterString $paramsJson
 
-    return $response.result.accounts
+    if ($PSBoundParameters.Keys -contains "WorkgroupName")
+    {
+        return $response.result.workgroups |  ? {$_.name -eq $WorkgroupName}
+    }
+    else
+    {
+        return $response.result.workgroups
+    }
+
+    
 }
 
