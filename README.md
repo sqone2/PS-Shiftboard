@@ -1,5 +1,6 @@
 # PS-Shiftboard
 Functions for working ShiftBoard JSON-RPC 2.0 API
+
 Shiftboard API documentation: https://www.shiftdata.com/
 
 ### Installation
@@ -10,6 +11,8 @@ From Powershell, import module
     Import-Module PS-Shiftboard
     
     
+    
+    
 ### Prerequisites
 
 To view your API credentials: Login > Admin > Cog Icon > General Settings > API Configuration
@@ -18,10 +21,12 @@ To view your API credentials: Login > Admin > Cog Icon > General Settings > API 
     $secret = 'TvL>UoWKb&HZbdZqDpKja+LdKvLf9TBDm4*Frfhu'
 
 
+
+
 ### Examples
 
 
-## Accounts (Users)
+#### Accounts (Users)
 
 Returns Shiftboard user account with email "jdoe@domain.com"
 
