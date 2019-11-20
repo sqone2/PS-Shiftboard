@@ -28,7 +28,9 @@ To view your API credentials: Login > Admin > Cog Icon > General Settings > API 
 &nbsp;
 &nbsp;
 ### Invoke API directly
-Creates new user named "Test User". Other relevant properties can be added to the $newUser HashTable as needed.
+Creates new user named "Test User"
+
+Other relevant properties can be added to the `$newUser` HashTable as needed.
 
     $method = 'account.create'
 
