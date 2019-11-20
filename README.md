@@ -18,16 +18,39 @@ From Powershell, import module
 ### Prerequisites
 
 To view your API credentials: Login > Admin > Cog Icon > General Settings > API Configuration
-
+    
+    # replace these with values from your account
+    # use these variables as parameters in functions
     $key = 'ef1231ea-9a1a-59c2-110a-e123a1231333' 
     $secret = 'TvL>UoWKb&HZbdZqDpKja+LdKvLf9TBDm4*Frfhu'
 
 
-&nbsp;
-&nbsp;
-### Examples
-&nbsp;
 
+&nbsp;
+&nbsp;
+### Invoke API directly
+Creates new user named "Test User". Other relevant properties can be added to the $newUser HashTable as needed.
+
+    $method = 'account.create'
+
+    $newUser = @{
+        "first_name" = "Test"
+        "last_name" = "User"
+        "screen_name" = "Test User"
+        "email" = "test@domain.com"
+        "external_id" = "123456"
+    }
+    $params = $newUser | ConvertTo-Json
+
+    $result = Invoke-ShiftboardApi -AccessKey $key -SignatureKey $secret -ShiftboardMethod $method -ParameterString $params
+    
+    
+&nbsp;
+&nbsp;
+### Helper function examples
+
+
+&nbsp;
 #### Accounts (Users)
 
 Get Shiftboard user account
