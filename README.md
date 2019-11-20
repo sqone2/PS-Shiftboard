@@ -43,7 +43,7 @@ Other relevant properties can be added to the `$newUser` HashTable as needed.
     }
     $params = $newUser | ConvertTo-Json
 
-    $result = Invoke-ShiftboardApi -AccessKey $key -SignatureKey $secret -ShiftboardMethod $method -ParameterString $params
+    Invoke-ShiftboardApi -AccessKey $key -SignatureKey $secret -ShiftboardMethod $method -ParameterString $params
     
     
 &nbsp;
