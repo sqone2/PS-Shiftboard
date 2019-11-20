@@ -28,9 +28,16 @@ To view your API credentials: Login > Admin > Cog Icon > General Settings > API 
 &nbsp;
 &nbsp;
 ### Invoke API directly
-Creates new user named "Test User"
 
-Other relevant properties can be added to the `$newUser` HashTable as needed.
+Returns first 10 user accounts from Shiftboard account
+
+    $method = 'account.list'
+    $params =  '{}'
+
+    Invoke-ShiftboardApi -AccessKey $key -SignatureKey $secret -ShiftboardMethod $method -ParameterString $params
+
+
+Creates new user named "Test User"
 
     $method = 'account.create'
 
