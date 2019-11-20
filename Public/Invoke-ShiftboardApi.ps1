@@ -102,15 +102,15 @@ function Invoke-ShiftboardApi
     #### Step 1. Create base64 hash of apiSecret, parameters, and method
 
     # combine method and parameters into "methodString". Turn methodString into bytes
-    $ShiftboardMethodString = "method" + $ShiftboardMethod + "params" + $ParameterString
-    $ShiftboardMethodStringBytes = [System.Text.Encoding]::UTF8.GetBytes($ShiftboardMethodString)
+    $shiftboardMethodString = "method" + $shiftboardMethod + "params" + $ParameterString
+    $shiftboardMethodStringBytes = [System.Text.Encoding]::UTF8.GetBytes($shiftboardMethodString)
 
     # encode apiSecret
-    $SignatureKeyBytes = [System.Text.Encoding]::UTF8.GetBytes($SignatureKey)
-    $encodedSecret = [System.Security.Cryptography.HMACSHA1]::new($SignatureKeyBytes);
+    $signatureKeyBytes = [System.Text.Encoding]::UTF8.GetBytes($signatureKey)
+    $encodedSecret = [System.Security.Cryptography.HMACSHA1]::new($signatureKeyBytes)
 
     # combine method string and apiSecret into hash and convert to base64
-    $combinedHash = $encodedSecret.ComputeHash($ShiftboardMethodStringBytes)
+    $combinedHash = $encodedSecret.ComputeHash($shiftboardMethodStringBytes)
     $combinedBase64 = [System.Convert]::ToBase64String($combinedHash)
 
 
