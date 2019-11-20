@@ -8,6 +8,7 @@ Shiftboard API documentation: https://www.shiftdata.com/
 ### Installation
 
 Download source and copy to a valid module directory. i.e. `C:\Program Files\WindowsPowerShell\Modules\`
+
 From Powershell, import module
 
     Import-Module PS-Shiftboard
@@ -25,6 +26,7 @@ To view your API credentials: Login > Admin > Cog Icon > General Settings > API 
 &nbsp;
 &nbsp;
 ### Examples
+&nbsp;
 
 #### Accounts (Users)
 
