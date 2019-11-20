@@ -8,7 +8,7 @@ Shiftboard API documentation: https://www.shiftdata.com/
 ### Installation
 &nbsp;
 
-Download source and copy to a valid module directory. i.e. C:\Program Files\WindowsPowerShell\Modules\
+Download source and copy to a valid module directory. i.e. `C:\Program Files\WindowsPowerShell\Modules\`
 From Powershell, import module
 
     Import-Module PS-Shiftboard
@@ -16,7 +16,6 @@ From Powershell, import module
 &nbsp;
 &nbsp;
 ### Prerequisites
-&nbsp;
 
 To view your API credentials: Login > Admin > Cog Icon > General Settings > API Configuration
 
@@ -30,7 +29,6 @@ To view your API credentials: Login > Admin > Cog Icon > General Settings > API 
 &nbsp;
 
 #### Accounts (Users)
-&nbsp;
 
 Get Shiftboard user account
 
@@ -45,7 +43,6 @@ Create new Shiftboard user account
 &nbsp;
 &nbsp;
 #### Workgroups (Teams)
-&nbsp;
 
 Get a workgroup's members
 
@@ -59,7 +56,6 @@ Adds account to a workgroup
 &nbsp;
 &nbsp;
 #### Time Off Requests
-&nbsp;
 
 Create new time off request
 
