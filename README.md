@@ -19,8 +19,7 @@ From Powershell, import module
 
 To view your API credentials: Login > Admin > Cog Icon > General Settings > API Configuration
     
-    # replace these with values from your account
-    # use these variables as parameters in functions
+    # replace these variables with your API keys
     $key = 'ef1231ea-9a1a-59c2-110a-e123a1231333' 
     $secret = 'TvL>UoWKb&HZbdZqDpKja+LdKvLf9TBDm4*Frfhu'
 
