@@ -30,7 +30,7 @@ To view your API credentials: Login > Admin > Cog Icon > General Settings > API 
 
 Get Shiftboard user account
 
-    $result = Get-ShiftboardAccount -AccessKey $key -SignatureKey $secret -Email "jdoe@domain.com"
+    Get-ShiftboardAccount -AccessKey $key -SignatureKey $secret -Email "jdoe@domain.com"
 
 
 Create new Shiftboard user account
