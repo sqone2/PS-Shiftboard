@@ -1,7 +1,7 @@
 ﻿<#
 .SYNOPSIS
     
-    Function used create new timeOffRequest object in Shiftboard
+    Function used get timeOffRequest object(s) from Shiftboard
  
 .PARAMETER AccessKey
  
@@ -16,44 +16,18 @@
 
 .PARAMETER AccountId
 
-    Id of Shiftboard user. Can also use ExternalId instead of Id
+    Optional. Id of Shiftboard user
 
-.PARAMETER ExternalId
-
-    External Id of Shiftboard user. Can also use Id instead of ExternalId
-
-.PARAMETER Type
-
-    Type of requets. i.e. "All Day"
-
-.PARAMETER Status
-
-    Request status. i.e. "Approved"
 
 .PARAMETER StartDate
 
-    Day that timeOffRequest begins
+    Optional. Day that timeOffRequest begins
 
 .PARAMETER EndDate
 
     Optional. Date that timeOffRequest ends
 
-.PARAMETER WorkgroupId
 
-    Optional. Workgroup to be associated with timeOffRequest
-
-
-.PARAMETER Paid
-
-    Whether timeOffRequest is paid time off
-
-.PARAMETER Category
-
-    Integer value of category mapping set in Shiftboard. To get these values, use "Get-ShiftboardTimeOffCategories"
-
-.PARAMETER Summary
-
-    Summary of timeOffRequest
 
 
 .EXAMPLE
