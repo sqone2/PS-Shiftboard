@@ -21,12 +21,13 @@
 
 .PARAMETER StartDate
 
-    Optional. Day that timeOffRequest begins
+    Optional. Day that timeOffRequest begins.
+    If omitted, default value is today's date.
 
 .PARAMETER EndDate
 
     Optional. Date that timeOffRequest ends
-
+    If omitted, default value is 7 days after StartDate.
 
 
 
