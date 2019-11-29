@@ -30,6 +30,10 @@
     If omitted, default value is 7 days after StartDate.
 
 
+.PARAMETER PuslishedOnly
+
+    Optional. If set to True, only shifts which are published will be returned
+
 
 
 
@@ -55,8 +59,8 @@ function Get-ShiftboardShift
         [Parameter(Mandatory=$true)][string]$AccountId,
 
         [Parameter(Mandatory=$false)][datetime]$StartDate,
-        [Parameter(Mandatory=$false)][datetime]$EndDate
-
+        [Parameter(Mandatory=$false)][datetime]$EndDate,
+        [Parameter(Mandatory=$false)][bool]$PuslishedOnly
 
     )
 
@@ -86,6 +90,11 @@ function Get-ShiftboardShift
     if ($PSBoundParameters.Keys -contains 'EndDate')
     {
         $params.select += @{end_date = $EndDate.ToString("yyyy-MM-dd")}
+    }
+
+    if ($PuslishedOnly -eq $true)
+    {
+        $params.select += @{published = $true}
     }
 
 

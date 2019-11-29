@@ -46,7 +46,7 @@
     $key = 'ef1231ea-9a1a-59c2-110a-e123a1231333'
     $secret = 'TvL>UoWKb&HZbdZqDpKja+LdKvLf9TBDm4*Frfhu'
 
-    $request = $reqs = Get-ShiftboardTimeOffRequest -AccessKey $key -SignatureKey $secret -AccountId 27 -StartDate '2019-11-28'
+    $request = Get-ShiftboardTimeOffRequest -AccessKey $key -SignatureKey $secret -AccountId 27 -StartDate '2019-11-28'
 
     # Returns timeOffRequests that take place after '2019-11-28', and where the user account id is "27"
 
