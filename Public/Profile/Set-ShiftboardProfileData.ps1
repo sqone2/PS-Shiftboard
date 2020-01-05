@@ -29,36 +29,37 @@
     # returns profile data for Account 1234
  
 #>
-function Get-ShiftboardProfileData
+function Set-ShiftboardProfileData
 {
     [CmdletBinding(PositionalBinding=$false)]
     param
     (
         [Parameter(Mandatory=$true)][string]$AccessKey,
         [Parameter(Mandatory=$true)][string]$SignatureKey,
-        [Parameter(Mandatory=$true)][string]$AccountId
+        [Parameter(Mandatory=$true)][string]$AccountId,
+        [Parameter(Mandatory=$true)][string]$ProfileOptionId,
+        [Parameter(Mandatory=$true)][string]$ProfileOptionValue
         
     )
 
 
     $params =  @{
-
-        page = @{
-            batch = 1000
-        }
-
-        select = @{
-            account = $AccountId
-        }
+        account = $AccountId
+        profile_data = @(
+            @{
+                profile_option = $ProfileOptionId
+                value = $ProfileOptionValue
+            }
+        )
     }
    
 
-    $method = 'profileData.list'
+    $method = 'profileData.update'
 
     $paramsJson = $params | ConvertTo-Json
 
     $response = Invoke-ShiftboardApi -AccessKey $AccessKey -SignatureKey $SignatureKey -ShiftboardMethod $method -ParameterString $paramsJson
 
-    return $response.result.profile_data
+    return $respons
 }
 
