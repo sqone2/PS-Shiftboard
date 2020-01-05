@@ -1,7 +1,7 @@
 ﻿<#
 .SYNOPSIS
     
-    Returns information about account profile data
+    Updates multiple profileData objects for a given account
  
 .PARAMETER AccessKey
  
@@ -15,7 +15,15 @@
 
 .PARAMETER AccountId
  
-    Id of Account to get profile data for
+    Id of Account to update profile data for
+
+.PARAMETER ProfileOptionId
+ 
+    Id of profile configuration object to be updated
+
+.PARAMETER ProfileOptionValue
+ 
+    New value to be assigned to profile configuration object specified by -ProfileOptionId
 
 
     
@@ -24,9 +32,9 @@
     $key = 'ef1231ea-9a1a-59c2-110a-e123a1231333'
     $secret = 'TvL>UoWKb&HZbdZqDpKja+LdKvLf9TBDm4*Frfhu'
 
-    $result = Get-ShiftboardAccount -AccessKey $key -SignatureKey $secret -Id 1234
+    $result = Set-ShiftboardAccount -AccessKey $key -SignatureKey $secret -Id 1234 -ProfileOptionId '1031' -ProfileOptionValue 'Blue'
 
-    # returns profile data for Account 1234
+    # assigns new profile data value to account id 1234
  
 #>
 function Set-ShiftboardProfileData
@@ -42,7 +50,6 @@ function Set-ShiftboardProfileData
         
     )
 
-
     $params =  @{
         account = $AccountId
         profile_data = @(
@@ -53,7 +60,6 @@ function Set-ShiftboardProfileData
         )
     }
    
-
     $method = 'profileData.update'
 
     $paramsJson = $params | ConvertTo-Json
