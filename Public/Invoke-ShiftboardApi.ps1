@@ -130,6 +130,8 @@ function Invoke-ShiftboardApi
 
     #### Step 4. Call API
 
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
     $response = Invoke-RestMethod  -Uri $uri -Method $HttpMethod -UseBasicParsing: $true
 
 
